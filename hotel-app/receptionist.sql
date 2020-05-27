@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 27 Bulan Mei 2020 pada 17.06
+-- Waktu pembuatan: 27 Bulan Mei 2020 pada 18.26
 -- Versi server: 10.4.6-MariaDB
 -- Versi PHP: 7.3.9
 
@@ -49,7 +49,7 @@ INSERT INTO `receptionist` (`id_recept`, `username`, `password`, `kode_recept`, 
 (2, 'anjas_', '81dc9bdb52d04dc20036dbd8313ed055', 'L002', 'Anjasmarah', 'Semarang', '1997-05-15', 'Jl. Bola Basket No. 35 ', '089876543210'),
 (3, 'anangbir', '81dc9bdb52d04dc20036dbd8313ed055', 'L003', 'Anang Biru', 'Bandung', '1996-05-07', 'Jl. Niagara No. 25', '085234567890'),
 (4, 'budimif', '81dc9bdb52d04dc20036dbd8313ed055', 'L004', 'Budi Mifasola', 'Medan', '1997-05-29', 'Jl. Sumatera No.25', '087789012345'),
-(5, 'cokicoki', '81dc9bdb52d04dc20036dbd8313ed055', 'L005', 'Coki Sihotang', 'Tangerang', '1995-07-21', 'Jl. Mobil Balap', '083210987654');
+(5, 'cokicoki', '81dc9bdb52d04dc20036dbd8313ed055', 'L005', 'Coki Sihotang', 'Tangerang', '1995-07-21', 'Jl. Mobil Balap No.27', '083210987654');
 
 --
 -- Indexes for dumped tables
