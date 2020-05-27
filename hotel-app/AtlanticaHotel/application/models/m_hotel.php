@@ -20,4 +20,9 @@ class M_hotel extends CI_Model
     {
         return $this->db->insert($table, $data);
     }
+
+    public function fetch_kamar($where)
+    {
+        return $this->db->query("SELECT * FROM kamar WHERE no_kamar LIKE '$where[no_kamar]%'");
+    }
 }

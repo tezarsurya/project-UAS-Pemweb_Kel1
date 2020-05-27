@@ -1,6 +1,5 @@
 <div class="row d-flex justify-content-between border-bottom mb-3">
     <h2><?php echo $page ?></h2>
-    <button class="btn btn-dark mb-3" style="background-color: #273c75;">Tambah Data <i class="fas fa-plus-circle"></i></button>
 </div>
 <div class="row justify-content-center mb-3">
     <table id="myTable" class="table table-bordered table-hover table-responsive table-striped">
@@ -38,7 +37,7 @@
                         <?php } ?>
                     </td>
                     <td>
-                        <a href="<?php echo base_url() ?>admin/view_data/detail_reservasi/<?php echo $row->id_reservasi ?>"><button class="btn btn-sm text-white" style="background-color: #40739e;">Details <i class="fas fa-book-open"></i></button></a>
+                        <a href="<?php echo base_url($root) ?>/view_data/detail_reservasi/<?php echo $row->id_reservasi ?>"><button class="btn btn-sm text-white" style="background-color: #40739e;">Details <i class="fas fa-book-open"></i></button></a>
                     </td>
                 </tr>
             <?php } ?>
