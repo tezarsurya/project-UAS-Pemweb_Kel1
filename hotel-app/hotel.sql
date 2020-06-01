@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2020 at 04:24 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.5
+-- Waktu pembuatan: 01 Jun 2020 pada 06.26
+-- Versi server: 10.4.6-MariaDB
+-- Versi PHP: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -24,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer`
+-- Struktur dari tabel `customer`
 --
 
 CREATE TABLE `customer` (
@@ -39,7 +40,7 @@ CREATE TABLE `customer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `customer`
+-- Dumping data untuk tabel `customer`
 --
 
 INSERT INTO `customer` (`id_customer`, `kode_customer`, `no_identitas`, `nama_customer`, `alamat`, `jenis_kelamin`, `no_telp`, `email`) VALUES
@@ -50,7 +51,7 @@ INSERT INTO `customer` (`id_customer`, `kode_customer`, `no_identitas`, `nama_cu
 (5, 'AH-Cust-5', '3401081505000002', 'Tezar Surya Fernanda', 'Kulon Progo', 'Laki-laki', '089515491052', 'tezarsurya@student.uns.ac.id');
 
 --
--- Triggers `customer`
+-- Trigger `customer`
 --
 DELIMITER $$
 CREATE TRIGGER `getAI` BEFORE INSERT ON `customer` FOR EACH ROW SET NEW.kode_customer =CONCAT('AH-Cust-',(SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA='hotel' AND TABLE_NAME='customer'))
@@ -60,7 +61,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kamar`
+-- Struktur dari tabel `kamar`
 --
 
 CREATE TABLE `kamar` (
@@ -73,7 +74,7 @@ CREATE TABLE `kamar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `kamar`
+-- Dumping data untuk tabel `kamar`
 --
 
 INSERT INTO `kamar` (`id_kamar`, `no_kamar`, `tipe_bed`, `tipe_kamar`, `occupied`, `harga`) VALUES
@@ -153,7 +154,7 @@ INSERT INTO `kamar` (`id_kamar`, `no_kamar`, `tipe_bed`, `tipe_kamar`, `occupied
 -- --------------------------------------------------------
 
 --
--- Table structure for table `receptionist`
+-- Struktur dari tabel `receptionist`
 --
 
 CREATE TABLE `receptionist` (
@@ -161,24 +162,29 @@ CREATE TABLE `receptionist` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `kode_recept` varchar(10) NOT NULL COMMENT 'Kode Resepsionis',
-  `nama_recept` varchar(255) NOT NULL COMMENT 'Nama Resepsionis'
+  `nama_recept` varchar(255) NOT NULL COMMENT 'Nama Resepsionis',
+  `tmp_lahir` varchar(255) NOT NULL,
+  `tgl_lahir` date NOT NULL,
+  `jenis_kelamin` enum('Laki-laki','Perempuan','','') NOT NULL,
+  `alamat` varchar(255) NOT NULL,
+  `no_telp` varchar(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `receptionist`
+-- Dumping data untuk tabel `receptionist`
 --
 
-INSERT INTO `receptionist` (`id_recept`, `username`, `password`, `kode_recept`, `nama_recept`) VALUES
-(1, 'ardhito_p', '81dc9bdb52d04dc20036dbd8313ed055', 'L001', 'Ardhito Pranoto'),
-(2, 'anjas_', '81dc9bdb52d04dc20036dbd8313ed055', 'L002', 'Anjasmarah'),
-(3, 'anangbir', '81dc9bdb52d04dc20036dbd8313ed055', 'L003', 'Anang Biru'),
-(4, 'budimif', '81dc9bdb52d04dc20036dbd8313ed055', 'L004', 'Budi Mifasola'),
-(5, 'cokicoki', '81dc9bdb52d04dc20036dbd8313ed055', 'L005', 'Coki Sihotang');
+INSERT INTO `receptionist` (`id_recept`, `username`, `password`, `kode_recept`, `nama_recept`, `tmp_lahir`, `tgl_lahir`, `jenis_kelamin`, `alamat`, `no_telp`) VALUES
+(1, 'ardhito_p', '81dc9bdb52d04dc20036dbd8313ed055', 'L001', 'Ardhito Pranoto', 'Surabaya', '1996-03-26', 'Laki-laki', 'Jl. Watu Kodok No.05 ', '081234567890'),
+(2, 'anjas_', '81dc9bdb52d04dc20036dbd8313ed055', 'L002', 'Anjasmarah', 'Semarang', '1997-05-15', 'Laki-laki', 'Jl. Bola Basket No. 35 ', '089876543210'),
+(3, 'anangbir', '81dc9bdb52d04dc20036dbd8313ed055', 'L003', 'Anang Biru', 'Bandung', '1996-05-07', 'Laki-laki', 'Jl. Niagara No. 25', '085234567890'),
+(4, 'budimif', '81dc9bdb52d04dc20036dbd8313ed055', 'L004', 'Budi Mifasola', 'Medan', '1997-05-29', 'Laki-laki', 'Jl. Sumatera No.25', '087789012345'),
+(5, 'cokicoki', '81dc9bdb52d04dc20036dbd8313ed055', 'L005', 'Coki Sihotang', 'Tangerang', '1995-07-21', 'Laki-laki', 'Jl. Mobil Balap No.27', '083210987654');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reservasi`
+-- Struktur dari tabel `reservasi`
 --
 
 CREATE TABLE `reservasi` (
@@ -192,7 +198,7 @@ CREATE TABLE `reservasi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `reservasi`
+-- Dumping data untuk tabel `reservasi`
 --
 
 INSERT INTO `reservasi` (`id_reservasi`, `kode_customer`, `no_kamar`, `tgl_checkin`, `tgl_checkout`, `kode_recept`, `status_reservasi`) VALUES
@@ -210,7 +216,7 @@ INSERT INTO `reservasi` (`id_reservasi`, `kode_customer`, `no_kamar`, `tgl_check
 -- --------------------------------------------------------
 
 --
--- Table structure for table `super_admin`
+-- Struktur dari tabel `super_admin`
 --
 
 CREATE TABLE `super_admin` (
@@ -218,14 +224,24 @@ CREATE TABLE `super_admin` (
   `kode_admin` varchar(10) NOT NULL,
   `nama_admin` varchar(100) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `password` varchar(20) NOT NULL
+  `password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `super_admin`
+--
+
+INSERT INTO `super_admin` (`id_admin`, `kode_admin`, `nama_admin`, `username`, `password`) VALUES
+(1, 'A001', 'Tezar Surya', 'tzrsurya', '81dc9bdb52d04dc20036dbd8313ed055'),
+(2, 'A002', 'Shinta Audia', 'shintatd', '81dc9bdb52d04dc20036dbd8313ed055'),
+(3, 'A003', 'Salsabilla Hasna', 'salsa', '81dc9bdb52d04dc20036dbd8313ed055'),
+(4, 'A004', 'Rina Amalia', 'rinamal', '81dc9bdb52d04dc20036dbd8313ed055');
 
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `view_reservasi`
--- (See below for the actual view)
+-- Stand-in struktur untuk tampilan `view_reservasi`
+-- (Lihat di bawah untuk tampilan aktual)
 --
 CREATE TABLE `view_reservasi` (
 `id_reservasi` int(11)
@@ -242,8 +258,8 @@ CREATE TABLE `view_reservasi` (
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `view_reservasi_full`
--- (See below for the actual view)
+-- Stand-in struktur untuk tampilan `view_reservasi_full`
+-- (Lihat di bawah untuk tampilan aktual)
 --
 CREATE TABLE `view_reservasi_full` (
 `id_reservasi` int(11)
@@ -268,7 +284,7 @@ CREATE TABLE `view_reservasi_full` (
 -- --------------------------------------------------------
 
 --
--- Structure for view `view_reservasi`
+-- Struktur untuk view `view_reservasi`
 --
 DROP TABLE IF EXISTS `view_reservasi`;
 
@@ -277,7 +293,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `view_reservasi_full`
+-- Struktur untuk view `view_reservasi_full`
 --
 DROP TABLE IF EXISTS `view_reservasi_full`;
 
@@ -288,28 +304,28 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 
 --
--- Indexes for table `customer`
+-- Indeks untuk tabel `customer`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`id_customer`),
   ADD UNIQUE KEY `kode_customer` (`kode_customer`) USING BTREE;
 
 --
--- Indexes for table `kamar`
+-- Indeks untuk tabel `kamar`
 --
 ALTER TABLE `kamar`
   ADD PRIMARY KEY (`id_kamar`),
   ADD UNIQUE KEY `no_kamar` (`no_kamar`) USING BTREE;
 
 --
--- Indexes for table `receptionist`
+-- Indeks untuk tabel `receptionist`
 --
 ALTER TABLE `receptionist`
   ADD PRIMARY KEY (`id_recept`),
   ADD UNIQUE KEY `kode_recept` (`kode_recept`);
 
 --
--- Indexes for table `reservasi`
+-- Indeks untuk tabel `reservasi`
 --
 ALTER TABLE `reservasi`
   ADD PRIMARY KEY (`id_reservasi`),
@@ -318,51 +334,51 @@ ALTER TABLE `reservasi`
   ADD KEY `kode_customer` (`kode_customer`) USING BTREE;
 
 --
--- Indexes for table `super_admin`
+-- Indeks untuk tabel `super_admin`
 --
 ALTER TABLE `super_admin`
   ADD PRIMARY KEY (`id_admin`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `customer`
+-- AUTO_INCREMENT untuk tabel `customer`
 --
 ALTER TABLE `customer`
   MODIFY `id_customer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `kamar`
+-- AUTO_INCREMENT untuk tabel `kamar`
 --
 ALTER TABLE `kamar`
   MODIFY `id_kamar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
--- AUTO_INCREMENT for table `receptionist`
+-- AUTO_INCREMENT untuk tabel `receptionist`
 --
 ALTER TABLE `receptionist`
   MODIFY `id_recept` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT for table `reservasi`
+-- AUTO_INCREMENT untuk tabel `reservasi`
 --
 ALTER TABLE `reservasi`
   MODIFY `id_reservasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `super_admin`
+-- AUTO_INCREMENT untuk tabel `super_admin`
 --
 ALTER TABLE `super_admin`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `reservasi`
+-- Ketidakleluasaan untuk tabel `reservasi`
 --
 ALTER TABLE `reservasi`
   ADD CONSTRAINT `reservasi_ibfk_1` FOREIGN KEY (`kode_customer`) REFERENCES `customer` (`kode_customer`) ON DELETE CASCADE ON UPDATE CASCADE,

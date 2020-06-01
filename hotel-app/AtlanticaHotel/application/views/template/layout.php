@@ -49,39 +49,39 @@
                     <a class="text-white" href="<?php echo base_url() ?>dashboard"><i class="fas fa-home mx-3"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a class="text-white" href=""><i class="fas fa-book-open mx-3"></i> Reservasi</a>
+                    <a class="text-white" href="<?php echo base_url($root) ?>/view_data/data_reservasi"><i class="fas fa-book-open mx-3"></i> Reservasi</a>
                 </li>
                 <li>
-                    <a class="text-white" href=""><i class="fas fa-person-booth mx-3"></i> Pengunjung</a>
+                    <a class="text-white" href="<?php echo base_url($root) ?>/view_data/data_customer"><i class="fas fa-person-booth mx-3"></i> Pengunjung</a>
                 </li>
                 <li>
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-white"><i class="fas fa-bed mx-3"></i> Kamar</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li>
-                            <a class="text-white" href="">Semua Kamar</a>
+                            <a class="text-white" href="<?php echo base_url($root) ?>/view_data/data_kamar">Semua Kamar</a>
                         </li>
                         <li>
-                            <a class="text-white" href="">Lantai 1</a>
+                            <a class="text-white" href="<?php echo base_url($root) ?>/view_data/data_kamar/1">Lantai 1</a>
                         </li>
                         <li>
-                            <a class="text-white" href="">Lantai 2</a>
+                            <a class="text-white" href="<?php echo base_url($root) ?>/view_data/data_kamar/2">Lantai 2</a>
                         </li>
                         <li>
-                            <a class="text-white" href="">Lantai 3</a>
+                            <a class="text-white" href="<?php echo base_url($root) ?>/view_data/data_kamar/3">Lantai 3</a>
                         </li>
                         <li>
-                            <a class="text-white" href="">Lantai 4</a>
+                            <a class="text-white" href="<?php echo base_url($root) ?>/view_data/data_kamar/4">Lantai 4</a>
                         </li>
                         <li>
-                            <a class="text-white" href="">Lantai 5</a>
+                            <a class="text-white" href="<?php echo base_url($root) ?>/view_data/data_kamar/5">Lantai 5</a>
                         </li>
                         <li>
-                            <a class="text-white" href="">Lantai 6</a>
+                            <a class="text-white" href="<?php echo base_url($root) ?>/view_data/data_kamar/6">Lantai 6</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a class="text-white" href=""><i class="fas fa-user-edit mx-3"></i> Resepsionis</a>
+                    <a class="text-white" href="<?php echo base_url($root) ?>/view_data/data_recept"><i class="fas fa-user-edit mx-3"></i> Resepsionis</a>
                 </li>
             </ul>
         </nav>
@@ -97,10 +97,10 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a class="nav-link" href="#"><i class="fas fa-user-circle"></i></a>
+                                <a class="nav-link" href="#"><?php echo $_SESSION['nama'] ?> <i class="fas fa-user-circle"></i></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="">Log out <i class="fas fa-sign-out-alt"></i></a>
+                                <a class="nav-link" href="<?php echo base_url() ?>login/logout">Log out <i class="fas fa-sign-out-alt"></i></a>
                             </li>
                         </ul>
                     </div>

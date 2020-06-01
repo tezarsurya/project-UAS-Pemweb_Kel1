@@ -1,6 +1,6 @@
 <div class="row d-flex justify-content-between border-bottom mb-3">
     <h2><?php echo $page ?><span class="badge text-white" style="background-color: #44bd32;">ID <?php echo $id ?></span></h2>
-    <a href="<?php echo base_url() ?>admin/view_data/data_reservasi"><button class="btn text-white mb-3" style="background-color: #273c75;">Kembali</button></a>
+    <a href="<?php echo base_url() ?>admin/view_data/data_reservasi"><button class="btn text-white mb-3" style="background-color: #273c75;">Data Reservasi <i class="fas fa-arrow-left"></i></button></a>
 </div>
 <div class="row justify-content-center d-flex mb-3">
     <div class="card w-100">
@@ -55,7 +55,7 @@
                     </tr>
                     <tr>
                         <th>Harga</th>
-                        <td>Rp <?php echo $row->harga ?></td>
+                        <td><?php echo "Rp " . number_format($row->harga, 0, ',', '.') ?></td>
                     </tr>
                     <tr>
                         <th>Tanggal Check-in</th>
@@ -73,7 +73,7 @@
                     </tr>
                     <tr>
                         <th>Total Harga</th>
-                        <td>Rp <?php echo $row->harga * $diff ?></td>
+                        <td><?php echo "Rp " . number_format($row->harga * $diff, 0, ',', '.') ?></td>
                     </tr>
                     <tr>
                         <th>Status</th>
