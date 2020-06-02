@@ -16,6 +16,10 @@
                         <td><?php echo $row->no_identitas ?></td>
                     </tr>
                     <tr>
+                        <th>Nama Pengunjung</th>
+                        <td><?php echo $row->nama_customer ?></td>
+                    </tr>
+                    <tr>
                         <th>Alamat</th>
                         <td><?php echo $row->alamat ?></td>
                     </tr>

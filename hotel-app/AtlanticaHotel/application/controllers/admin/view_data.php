@@ -121,9 +121,14 @@ class View_data extends CI_Controller
         $id = array(
             'kode_recept' => $this->uri->segment(4)
         );
-
         $data = array(
-            'row_recept' => $this->m_hotel->fetch_where('receptionist', $id)
+            'row_recept' => $this->m_hotel->fetch_where('receptionist', $id),
+            'page' => 'Detail Resepsionis ',
+            'title' => $this->title . 'Detail Resepsionis',
+            'id' => $id['kode_recept'],
+            'root' => $this->main_data['root']
         );
+
+        $this->layout->display('admin/view_data/detail_recept', $data);
     }
 }

@@ -28,4 +28,14 @@ class Form extends CI_Controller
         );
         $this->layout->display('admin/form/formKamar', $data);
     }
+
+    public function form_recept()
+    {
+        $data = array(
+            'page' => 'Tambah Data Resepsionis',
+            'title' => $this->title . 'Form Resepsionis',
+            'root' => $this->main_data['root']
+        );
+        $this->layout->display('admin/form/formRecept',  $data);
+    }
 }
