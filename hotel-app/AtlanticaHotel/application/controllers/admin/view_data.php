@@ -115,4 +115,15 @@ class View_data extends CI_Controller
 
         $this->layout->display('admin/view_data/receptionist', $data);
     }
+
+    public function detail_recept()
+    {
+        $id = array(
+            'kode_recept' => $this->uri->segment(4)
+        );
+
+        $data = array(
+            'row_recept' => $this->m_hotel->fetch_where('receptionist', $id)
+        );
+    }
 }
