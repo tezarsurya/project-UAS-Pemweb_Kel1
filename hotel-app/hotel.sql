@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 01 Jun 2020 pada 06.26
--- Versi server: 10.4.6-MariaDB
--- Versi PHP: 7.3.9
+-- Generation Time: Jun 06, 2020 at 12:10 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -25,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `customer`
+-- Table structure for table `customer`
 --
 
 CREATE TABLE `customer` (
@@ -40,7 +39,7 @@ CREATE TABLE `customer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `customer`
+-- Dumping data for table `customer`
 --
 
 INSERT INTO `customer` (`id_customer`, `kode_customer`, `no_identitas`, `nama_customer`, `alamat`, `jenis_kelamin`, `no_telp`, `email`) VALUES
@@ -51,7 +50,7 @@ INSERT INTO `customer` (`id_customer`, `kode_customer`, `no_identitas`, `nama_cu
 (5, 'AH-Cust-5', '3401081505000002', 'Tezar Surya Fernanda', 'Kulon Progo', 'Laki-laki', '089515491052', 'tezarsurya@student.uns.ac.id');
 
 --
--- Trigger `customer`
+-- Triggers `customer`
 --
 DELIMITER $$
 CREATE TRIGGER `getAI` BEFORE INSERT ON `customer` FOR EACH ROW SET NEW.kode_customer =CONCAT('AH-Cust-',(SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA='hotel' AND TABLE_NAME='customer'))
@@ -61,7 +60,25 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kamar`
+-- Stand-in structure for view `history_reservasi`
+-- (See below for the actual view)
+--
+CREATE TABLE `history_reservasi` (
+`kode_customer` varchar(10)
+,`nama_customer` varchar(255)
+,`email` varchar(50)
+,`no_telp` varchar(20)
+,`no_kamar` varchar(10)
+,`tgl_checkin` date
+,`tgl_checkout` date
+,`kode_recept` varchar(10)
+,`status_reservasi` enum('Aktif','Tidak Aktif')
+);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kamar`
 --
 
 CREATE TABLE `kamar` (
@@ -74,7 +91,7 @@ CREATE TABLE `kamar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `kamar`
+-- Dumping data for table `kamar`
 --
 
 INSERT INTO `kamar` (`id_kamar`, `no_kamar`, `tipe_bed`, `tipe_kamar`, `occupied`, `harga`) VALUES
@@ -154,7 +171,7 @@ INSERT INTO `kamar` (`id_kamar`, `no_kamar`, `tipe_bed`, `tipe_kamar`, `occupied
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `receptionist`
+-- Table structure for table `receptionist`
 --
 
 CREATE TABLE `receptionist` (
@@ -171,34 +188,34 @@ CREATE TABLE `receptionist` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `receptionist`
+-- Dumping data for table `receptionist`
 --
 
 INSERT INTO `receptionist` (`id_recept`, `username`, `password`, `kode_recept`, `nama_recept`, `tmp_lahir`, `tgl_lahir`, `jenis_kelamin`, `alamat`, `no_telp`) VALUES
-(1, 'ardhito_p', '81dc9bdb52d04dc20036dbd8313ed055', 'L001', 'Ardhito Pranoto', 'Surabaya', '1996-03-26', 'Laki-laki', 'Jl. Watu Kodok No.05 ', '081234567890'),
-(2, 'anjas_', '81dc9bdb52d04dc20036dbd8313ed055', 'L002', 'Anjasmarah', 'Semarang', '1997-05-15', 'Laki-laki', 'Jl. Bola Basket No. 35 ', '089876543210'),
-(3, 'anangbir', '81dc9bdb52d04dc20036dbd8313ed055', 'L003', 'Anang Biru', 'Bandung', '1996-05-07', 'Laki-laki', 'Jl. Niagara No. 25', '085234567890'),
-(4, 'budimif', '81dc9bdb52d04dc20036dbd8313ed055', 'L004', 'Budi Mifasola', 'Medan', '1997-05-29', 'Laki-laki', 'Jl. Sumatera No.25', '087789012345'),
-(5, 'cokicoki', '81dc9bdb52d04dc20036dbd8313ed055', 'L005', 'Coki Sihotang', 'Tangerang', '1995-07-21', 'Laki-laki', 'Jl. Mobil Balap No.27', '083210987654');
+(1, 'ardhito_p', 'MTIzNA==', 'L001', 'Ardhito Pranoto', 'Surabaya', '1996-03-26', 'Laki-laki', 'Jl. Watu Kodok No.05', '081234567890'),
+(2, 'anjas_', 'MTIzNA==', 'L002', 'Anjasmarah', 'Semarang', '1997-05-15', 'Laki-laki', 'Jl. Bola Basket No. 35', '089876543210'),
+(3, 'anangbir', 'MTIzNA==', 'L003', 'Anang Biru', 'Bandung', '1996-05-07', 'Laki-laki', 'Jl. Niagara No. 25', '085234567890'),
+(4, 'budimif', 'MTIzNA==', 'L004', 'Budi Mifasola', 'Medan', '1997-05-29', 'Laki-laki', 'Jl. Sumatera No.25', '087789012345'),
+(5, 'cokicoki', 'MTIzNA==', 'L005', 'Coki Sihotang', 'Tangerang', '1995-07-21', 'Laki-laki', 'Jl. Mobil Balap No.27', '083210987654');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `reservasi`
+-- Table structure for table `reservasi`
 --
 
 CREATE TABLE `reservasi` (
   `id_reservasi` int(11) NOT NULL,
   `kode_customer` varchar(10) NOT NULL,
-  `no_kamar` varchar(10) NOT NULL,
+  `no_kamar` varchar(10) DEFAULT NULL,
   `tgl_checkin` date NOT NULL COMMENT 'Tanggal Check-in',
   `tgl_checkout` date NOT NULL COMMENT 'Tanggal Check-out',
-  `kode_recept` varchar(10) NOT NULL,
+  `kode_recept` varchar(10) DEFAULT NULL,
   `status_reservasi` enum('Aktif','Tidak Aktif') NOT NULL COMMENT 'Status'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `reservasi`
+-- Dumping data for table `reservasi`
 --
 
 INSERT INTO `reservasi` (`id_reservasi`, `kode_customer`, `no_kamar`, `tgl_checkin`, `tgl_checkout`, `kode_recept`, `status_reservasi`) VALUES
@@ -216,7 +233,7 @@ INSERT INTO `reservasi` (`id_reservasi`, `kode_customer`, `no_kamar`, `tgl_check
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `super_admin`
+-- Table structure for table `super_admin`
 --
 
 CREATE TABLE `super_admin` (
@@ -228,7 +245,7 @@ CREATE TABLE `super_admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `super_admin`
+-- Dumping data for table `super_admin`
 --
 
 INSERT INTO `super_admin` (`id_admin`, `kode_admin`, `nama_admin`, `username`, `password`) VALUES
@@ -240,8 +257,8 @@ INSERT INTO `super_admin` (`id_admin`, `kode_admin`, `nama_admin`, `username`, `
 -- --------------------------------------------------------
 
 --
--- Stand-in struktur untuk tampilan `view_reservasi`
--- (Lihat di bawah untuk tampilan aktual)
+-- Stand-in structure for view `view_reservasi`
+-- (See below for the actual view)
 --
 CREATE TABLE `view_reservasi` (
 `id_reservasi` int(11)
@@ -258,8 +275,8 @@ CREATE TABLE `view_reservasi` (
 -- --------------------------------------------------------
 
 --
--- Stand-in struktur untuk tampilan `view_reservasi_full`
--- (Lihat di bawah untuk tampilan aktual)
+-- Stand-in structure for view `view_reservasi_full`
+-- (See below for the actual view)
 --
 CREATE TABLE `view_reservasi_full` (
 `id_reservasi` int(11)
@@ -284,7 +301,16 @@ CREATE TABLE `view_reservasi_full` (
 -- --------------------------------------------------------
 
 --
--- Struktur untuk view `view_reservasi`
+-- Structure for view `history_reservasi`
+--
+DROP TABLE IF EXISTS `history_reservasi`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `history_reservasi`  AS  select `reservasi`.`kode_customer` AS `kode_customer`,`customer`.`nama_customer` AS `nama_customer`,`customer`.`email` AS `email`,`customer`.`no_telp` AS `no_telp`,`reservasi`.`no_kamar` AS `no_kamar`,`reservasi`.`tgl_checkin` AS `tgl_checkin`,`reservasi`.`tgl_checkout` AS `tgl_checkout`,`reservasi`.`kode_recept` AS `kode_recept`,`reservasi`.`status_reservasi` AS `status_reservasi` from (`reservasi` join `customer`) where `reservasi`.`status_reservasi` = 'Tidak Aktif' and `reservasi`.`kode_customer` = `customer`.`kode_customer` WITH CASCADED CHECK OPTION ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `view_reservasi`
 --
 DROP TABLE IF EXISTS `view_reservasi`;
 
@@ -293,39 +319,39 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Struktur untuk view `view_reservasi_full`
+-- Structure for view `view_reservasi_full`
 --
 DROP TABLE IF EXISTS `view_reservasi_full`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_reservasi_full`  AS  select `reservasi`.`id_reservasi` AS `id_reservasi`,`customer`.`kode_customer` AS `kode_customer`,`customer`.`no_identitas` AS `no_identitas`,`customer`.`nama_customer` AS `nama_customer`,`customer`.`alamat` AS `alamat`,`customer`.`jenis_kelamin` AS `jenis_kelamin`,`customer`.`no_telp` AS `no_telp`,`customer`.`email` AS `email`,`kamar`.`no_kamar` AS `no_kamar`,`kamar`.`tipe_bed` AS `tipe_bed`,`kamar`.`tipe_kamar` AS `tipe_kamar`,`kamar`.`harga` AS `harga`,`reservasi`.`tgl_checkin` AS `tgl_checkin`,`reservasi`.`tgl_checkout` AS `tgl_checkout`,`reservasi`.`status_reservasi` AS `status_reservasi`,`receptionist`.`kode_recept` AS `kode_recept`,`receptionist`.`nama_recept` AS `nama_recept` from (((`customer` join `kamar`) join `reservasi`) join `receptionist`) where `reservasi`.`kode_customer` = `customer`.`kode_customer` and `reservasi`.`no_kamar` = `kamar`.`no_kamar` and `reservasi`.`kode_recept` = `receptionist`.`kode_recept` WITH CASCADED CHECK OPTION ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_reservasi_full`  AS  select `reservasi`.`id_reservasi` AS `id_reservasi`,`customer`.`kode_customer` AS `kode_customer`,`customer`.`no_identitas` AS `no_identitas`,`customer`.`nama_customer` AS `nama_customer`,`customer`.`alamat` AS `alamat`,`customer`.`jenis_kelamin` AS `jenis_kelamin`,`customer`.`no_telp` AS `no_telp`,`customer`.`email` AS `email`,`kamar`.`no_kamar` AS `no_kamar`,`kamar`.`tipe_bed` AS `tipe_bed`,`kamar`.`tipe_kamar` AS `tipe_kamar`,`kamar`.`harga` AS `harga`,`reservasi`.`tgl_checkin` AS `tgl_checkin`,`reservasi`.`tgl_checkout` AS `tgl_checkout`,`reservasi`.`status_reservasi` AS `status_reservasi`,`receptionist`.`kode_recept` AS `kode_recept`,`receptionist`.`nama_recept` AS `nama_recept` from (((`customer` join `kamar`) join `reservasi`) join `receptionist`) where `reservasi`.`status_reservasi` = 'Aktif' and `reservasi`.`kode_customer` = `customer`.`kode_customer` and `reservasi`.`no_kamar` = `kamar`.`no_kamar` and `reservasi`.`kode_recept` = `receptionist`.`kode_recept` WITH CASCADED CHECK OPTION ;
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `customer`
+-- Indexes for table `customer`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`id_customer`),
   ADD UNIQUE KEY `kode_customer` (`kode_customer`) USING BTREE;
 
 --
--- Indeks untuk tabel `kamar`
+-- Indexes for table `kamar`
 --
 ALTER TABLE `kamar`
   ADD PRIMARY KEY (`id_kamar`),
   ADD UNIQUE KEY `no_kamar` (`no_kamar`) USING BTREE;
 
 --
--- Indeks untuk tabel `receptionist`
+-- Indexes for table `receptionist`
 --
 ALTER TABLE `receptionist`
   ADD PRIMARY KEY (`id_recept`),
   ADD UNIQUE KEY `kode_recept` (`kode_recept`);
 
 --
--- Indeks untuk tabel `reservasi`
+-- Indexes for table `reservasi`
 --
 ALTER TABLE `reservasi`
   ADD PRIMARY KEY (`id_reservasi`),
@@ -334,56 +360,56 @@ ALTER TABLE `reservasi`
   ADD KEY `kode_customer` (`kode_customer`) USING BTREE;
 
 --
--- Indeks untuk tabel `super_admin`
+-- Indexes for table `super_admin`
 --
 ALTER TABLE `super_admin`
   ADD PRIMARY KEY (`id_admin`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `customer`
+-- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
   MODIFY `id_customer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `kamar`
+-- AUTO_INCREMENT for table `kamar`
 --
 ALTER TABLE `kamar`
-  MODIFY `id_kamar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id_kamar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
--- AUTO_INCREMENT untuk tabel `receptionist`
+-- AUTO_INCREMENT for table `receptionist`
 --
 ALTER TABLE `receptionist`
-  MODIFY `id_recept` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_recept` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT untuk tabel `reservasi`
+-- AUTO_INCREMENT for table `reservasi`
 --
 ALTER TABLE `reservasi`
-  MODIFY `id_reservasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_reservasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT untuk tabel `super_admin`
+-- AUTO_INCREMENT for table `super_admin`
 --
 ALTER TABLE `super_admin`
   MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `reservasi`
+-- Constraints for table `reservasi`
 --
 ALTER TABLE `reservasi`
   ADD CONSTRAINT `reservasi_ibfk_1` FOREIGN KEY (`kode_customer`) REFERENCES `customer` (`kode_customer`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `reservasi_ibfk_2` FOREIGN KEY (`no_kamar`) REFERENCES `kamar` (`no_kamar`),
-  ADD CONSTRAINT `reservasi_ibfk_3` FOREIGN KEY (`kode_recept`) REFERENCES `receptionist` (`kode_recept`);
+  ADD CONSTRAINT `reservasi_ibfk_2` FOREIGN KEY (`no_kamar`) REFERENCES `kamar` (`no_kamar`) ON DELETE SET NULL,
+  ADD CONSTRAINT `reservasi_ibfk_3` FOREIGN KEY (`kode_recept`) REFERENCES `receptionist` (`kode_recept`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
