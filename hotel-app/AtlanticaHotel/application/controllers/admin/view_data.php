@@ -46,6 +46,18 @@ class View_data extends CI_Controller
         $this->layout->display('admin/view_data/detail_reservasi', $data);
     }
 
+    public function riwayat_reservasi()
+    {
+        $data = array(
+            'row_reservasi' => $this->m_hotel->fetch('history_reservasi'),
+            'page' => 'Riwayat Reservasi',
+            'title' => $this->title . 'Riwayat Reservasi',
+            'root' => $this->main_data['root']
+        );
+
+        $this->layout->display('admin/view_data/riwayat_reservasi', $data);
+    }
+
     public function data_customer()
     {
         $data = array(
@@ -91,6 +103,10 @@ class View_data extends CI_Controller
                 'id' => $id['no_kamar']
             );
 
+            if ($this->uri->segment(5) == 'delete_failed') {
+                $data['pesan_kamar'] = TRUE;
+            }
+
             $this->layout->display('admin/view_data/kamar', $data);
         } else {
             $data = array(
@@ -123,7 +139,59 @@ class View_data extends CI_Controller
         );
 
         $data = array(
-            'row_recept' => $this->m_hotel->fetch_where('receptionist', $id)
+            'row_recept' => $this->m_hotel->fetch_where('receptionist', $id),
+            'page' => 'Detail Resepsionis ',
+            'title' => $this->title . 'Detail Resepsionis',
+            'root' => $this->main_data['root'],
+            'id' => $id['kode_recept']
         );
+
+        if ($this->uri->segment(5) !== NULL) {
+            $data['pesan_recept'] = TRUE;
+        }
+
+        $this->layout->display('admin/view_data/detail_recept', $data);
+    }
+
+    public function delete_recept()
+    {
+        $data = array(
+            'status_reservasi' => 'Aktif',
+            'kode_recept' => $this->uri->segment(4)
+        );
+
+        $id = array(
+            'kode_recept' => $this->uri->segment(4)
+        );
+
+        $cek_recept = $this->m_hotel->fetch_where('view_reservasi_full', $data)->num_rows();
+
+        if ($cek_recept > 0) {
+            redirect(base_url('admin/view_data/detail_recept/' . $data['kode_recept'] . '/delete_failed'));
+        } else {
+            $this->m_hotel->delete('receptionist', $id);
+            redirect(base_url('admin/view_data/data_recept'));
+        }
+    }
+
+    public function delete_kamar()
+    {
+        $data = array(
+            'status_reservasi' => 'Aktif',
+            'no_kamar' => $this->uri->segment(4)
+        );
+
+        $id = array(
+            'no_kamar' => $this->uri->segment(4)
+        );
+
+        $cek_kamar = $this->m_hotel->fetch_where('view_reservasi_full', $data)->num_rows();
+
+        if ($cek_kamar > 0) {
+            redirect(base_url('admin/view_data/data_kamar/' . substr($data['no_kamar'], 0, 1) . '/delete_failed'));
+        } else {
+            $this->m_hotel->delete('kamar', $id);
+            redirect(base_url('admin/view_data/data_kamar'));
+        }
     }
 }

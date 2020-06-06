@@ -49,7 +49,15 @@
                     <a class="text-white" href="<?php echo base_url() ?>dashboard"><i class="fas fa-home mx-3"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a class="text-white" href="<?php echo base_url($root) ?>/view_data/data_reservasi"><i class="fas fa-book-open mx-3"></i> Reservasi</a>
+                    <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-white"><i class="fas fa-bed mx-3"></i> Reservasi</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu2">
+                        <li>
+                            <a class="text-white" href="<?php echo base_url($root) ?>/view_data/data_reservasi">Reservasi Aktif</a>
+                        </li>
+                        <li>
+                            <a class="text-white" href="<?php echo base_url($root) ?>/view_data/riwayat_reservasi">Riwayat Reservasi</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     <a class="text-white" href="<?php echo base_url($root) ?>/view_data/data_customer"><i class="fas fa-person-booth mx-3"></i> Pengunjung</a>
@@ -130,6 +138,45 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="modal fade" id="alertRecept" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="">Gagal menghapus data Resepsionis!</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Pastikan Resepsionis tidak sedang menangani reservasi aktif!
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="alertKamar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="">Gagal menghapus data Kamar!</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Pastikan Kamar tidak sedang dipakai!
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -167,9 +214,41 @@
                 $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
             });
 
+            $('#deleteModal_recept').on('show.bs.modal', function(e) {
+                $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            });
+
+            $('#deleteModal_kamar').on('show.bs.modal', function(e) {
+                $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            });
+
             $('#myTable').DataTable({
                 "paging": "false"
             });
+
+            $('#lantai').change(function() {
+                var el = $(this).val();
+                if (el == "1") {
+                    $('#tipe_kamar').html("<option value='Standard Room'>Standard Room</option>");
+                } else if (el == "2") {
+                    $('#tipe_kamar').html("<option value='Superior Room'>Superior Room</option>");
+                } else if (el == "3") {
+                    $('#tipe_kamar').html("<option value='Deluxe Room'>Deluxe Room</option>");
+                } else if (el == "4") {
+                    $('#tipe_kamar').html("<option value='Junior Suite Room'>Junior Suite Room</option>");
+                } else if (el == "5") {
+                    $('#tipe_kamar').html("<option value='Suite Room'>Suite Room</option>");
+                } else if (el == "6") {
+                    $('#tipe_kamar').html("<option value='Presidential Suite'>Presidential Suite</option>");
+                }
+            });
+            <?php if (isset($pesan_recept)) { ?>
+                $('#alertRecept').modal('show')
+            <?php } ?>
+
+            <?php if (isset($pesan_kamar)) { ?>
+                $('#alertKamar').modal('show')
+            <?php } ?>
         });
     </script>
 

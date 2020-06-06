@@ -1,5 +1,6 @@
 <div class="row d-flex justify-content-between border-bottom mb-3">
     <h2><?php echo $page ?></h2>
+    <a href="<?php echo base_url($root) ?>/form/form_recept"><button class="btn text-white" style="background-color: #273c75;">Tambah Data <i class="fas fa-plus-square"></i></button></a>
 </div>
 <div class="row justify-content-center mb-3">
     <table id="myTable" class="table table-bordered table-hover table-responsive table-striped">
