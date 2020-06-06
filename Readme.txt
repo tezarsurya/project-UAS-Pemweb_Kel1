@@ -7,4 +7,4 @@ Super_Admin
 
 3. Untuk pengaturan lainnya diperuntukkan pada bagian Petugas Resepsionis (project sebelumnya)
 
-4. Apabila ingin melakukan perubahan selain pada menu Kamar dan Resepsionis, dapat dilakukan di dalam databasenya langsung
+4. Apabila ingin melakukan perubahan selain pada menu Kamar dan Resepsionis, dapat dilakukan di dalam database-nya langsung
