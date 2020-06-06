@@ -1,4 +1,8 @@
 <div class="row d-flex justify-content-between border-bottom mb-3">
+<<<<<<< HEAD
+    <h2><?php echo $page ?></h2>
+    <a href="<?php echo base_url() ?>admin/view_data/data_recept"><button class="btn text-white mb-3" style="background-color: #273c75;">Data Resepsionis <i class="fas fa-arrow-left    "></i></i></button></a>
+=======
     <h2><?php if (isset($id)) { ?>
             <?php echo $page ?><span class="badge text-white" style="background-color: #44bd32;"><?php echo $id ?></span>
         <?php } else {
@@ -135,4 +139,5 @@
         <button type="submit" class="btn text-white" style="background-color: #273c75;">Simpan <i class="fas fa-save"></i></button>
         </form>
     <?php } ?>
+>>>>>>> master
 </div>
