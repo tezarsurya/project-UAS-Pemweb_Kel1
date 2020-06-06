@@ -1,6 +1,6 @@
 <div class="row d-flex justify-content-between border-bottom mb-3">
     <h2><?php echo $page ?><span class="badge text-white" style="background-color: #44bd32;"><?php echo $id ?></span></h2>
-    <a href="<?php echo base_url() ?>admin/view_data/data_customer"><button class="btn text-white mb-3" style="background-color: #273c75;">Data Pengunjung <i class="fas fa-arrow-left    "></i></i></button></a>
+    <a href="<?php echo base_url() ?>admin/view_data/data_customer"><button class="btn text-white mb-3" style="background-color: #273c75;">Data Pengunjung <i class="fas fa-arrow-left"></i></button></a>
 </div>
 <div class="row justify-content-center d-flex mb-3">
     <div class="card w-100">
@@ -14,6 +14,10 @@
                     <tr>
                         <th>Nomor Identitas</th>
                         <td><?php echo $row->no_identitas ?></td>
+                    </tr>
+                    <tr>
+                        <th>Nama Pengunjung</th>
+                        <td><?php echo $row->nama_customer ?></td>
                     </tr>
                     <tr>
                         <th>Alamat</th>
