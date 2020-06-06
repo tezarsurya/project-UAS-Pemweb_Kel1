@@ -12,14 +12,24 @@
                         <td><?php echo $row->kode_recept ?></td>
                     </tr>
                     <tr>
+<<<<<<< HEAD
                         <th>Username</th>
                         <td><?php echo $row->username ?></td>
                     </tr>
                     <tr>
+=======
+>>>>>>> master
                         <th>Nama Resepsionis</th>
                         <td><?php echo $row->nama_recept ?></td>
                     </tr>
                     <tr>
+<<<<<<< HEAD
+=======
+                        <th>Username</th>
+                        <td><?php echo $row->username ?></td>
+                    </tr>
+                    <tr>
+>>>>>>> master
                         <th>Tempat Lahir</th>
                         <td><?php echo $row->tmp_lahir ?></td>
                     </tr>
@@ -41,6 +51,13 @@
                     </tr>
                 <?php } ?>
             </table>
+<<<<<<< HEAD
+=======
+            <div class="row mx-2">
+                <a href="<?php echo base_url($root) ?>/form/form_recept/<?php echo $row->kode_recept ?>"><button class="btn text-white" style="background-color: #44bd32;">Edit Data <i class="fas fa-pencil-alt"></i></button></a>
+                <button class="btn text-white mx-2" style="background-color: #c23616;" data-toggle='modal' data-target="#deleteModal" data-href="<?php echo base_url($root) ?>/view_data/delete_recept/<?php echo $row->kode_recept ?>">Hapus Resepsionis <i class="fas fa-trash"></i></button>
+            </div>
+>>>>>>> master
         </div>
     </div>
 </div>
