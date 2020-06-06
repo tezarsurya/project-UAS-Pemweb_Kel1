@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 06, 2020 at 12:10 PM
+-- Generation Time: Jun 06, 2020 at 12:12 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -408,7 +408,7 @@ ALTER TABLE `super_admin`
 --
 ALTER TABLE `reservasi`
   ADD CONSTRAINT `reservasi_ibfk_1` FOREIGN KEY (`kode_customer`) REFERENCES `customer` (`kode_customer`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `reservasi_ibfk_2` FOREIGN KEY (`no_kamar`) REFERENCES `kamar` (`no_kamar`) ON DELETE SET NULL,
+  ADD CONSTRAINT `reservasi_ibfk_2` FOREIGN KEY (`no_kamar`) REFERENCES `kamar` (`no_kamar`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `reservasi_ibfk_3` FOREIGN KEY (`kode_recept`) REFERENCES `receptionist` (`kode_recept`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
